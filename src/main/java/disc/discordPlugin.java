@@ -80,8 +80,14 @@ public class discordPlugin extends Plugin {
 
         //live chat
         TextChannel tc = discChannels.get("live_chat_channel_id");
+        TextChannel cmd_channel = discChannels.get("commands_channel_id");
         if (tc != null) {
             Events.on(EventType.PlayerChatEvent.class, event -> {
+                if (event.message.startsWith("/") && cmd_channel != null) {
+                    cmd_channel.sendMessage(Strings.format("[@] **@**: @", tc.getType().name(), event.player.name(), event.message));
+                    return;
+                }
+
                 tc.sendMessage("**" + event.player.name.replace('*', '+') + "**: " + event.message);
             });
         }

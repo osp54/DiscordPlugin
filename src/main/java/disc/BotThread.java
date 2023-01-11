@@ -32,7 +32,7 @@ public class BotThread extends Thread{
         while (this.mt.isAlive()) {
             try {
                 Thread.sleep(1000);
-            } catch (Exception e) {
+            } catch (Exception ignored) {
 
             }
         }
